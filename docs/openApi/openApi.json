@@ -1,0 +1,594 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Music Slider API",
+    "version": "1.0",
+    "description": "Musi Slider API"
+  },
+  "tags": [
+    {
+      "name": "musics"
+    },
+    {
+      "name": "presentations"
+    }
+  ],
+  "paths": {
+    "/musics": {
+      "get": {
+        "tags": ["musics"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "musicName"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "200 OK"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "drive_file_id": {
+                            "type": "string",
+                            "example": "abcdefg123456"
+                          },
+                          "drive_file_name": {
+                            "type": "string",
+                            "example": "人間っていいな"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "drive_file_id": "abcdefg123456",
+                          "drive_file_name": "人間っていいな"
+                        },
+                        {
+                          "drive_file_id": "1a3j6io13bojk",
+                          "drive_file_name": "人間っていいのか？"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "失敗時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "500 Internal Server Error"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "hoge is not found"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/musics/:id": {
+      "get": {
+        "tags": ["musics"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "musicId"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "200 OK"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "downloadLink": {
+                          "type": "string",
+                          "example": "https://hogehoge?token=fugafuga.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "失敗時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "500 Internal Server Error"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "hoge is not found"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/presentations": {
+      "post": {
+        "tags": ["presentations"],
+        "description": "プレゼンテーションファイルの保存。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "driveFileId": {
+                    "type": "string",
+                    "example": "hogehoge"
+                  },
+                  "driveFileName": {
+                    "type": "string",
+                    "example": "人間っていいな"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "201 Created"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "presentation": {
+                          "type": "object",
+                          "properties": {
+                            "driveFileId": {
+                              "type": "string",
+                              "example": "hogehoge"
+                            },
+                            "driveFileName": {
+                              "type": "string",
+                              "example": "人間っていいな"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "失敗時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "500 Internal Server Error"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "hoge is not found"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/slides": {
+      "get": {
+        "tags": ["slides"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "musicId"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "200 OK"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "slides": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "number": {
+                                "type": "integer",
+                                "example": 0
+                              },
+                              "time": {
+                                "type": "integer",
+                                "example": 2.35
+                              }
+                            }
+                          },
+                          "example": [
+                            {
+                              "number": 0,
+                              "time": 0
+                            },
+                            {
+                              "number": 1,
+                              "time": 1.25
+                            },
+                            {
+                              "number": 2,
+                              "time": 3.68
+                            },
+                            {
+                              "number": 3,
+                              "time": 7.9
+                            },
+                            {
+                              "number": 4,
+                              "time": 12.15
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "失敗時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "500 Internal Server Error"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "hoge is not found"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["slides"],
+        "description": "切り替え時間付きスライドの保存",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "presentationId": {
+                    "type": "string",
+                    "example": "ancdefg123456"
+                  },
+                  "slides": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "number": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "time": {
+                          "type": "integer",
+                          "example": 3.25
+                        }
+                      }
+                    },
+                    "example": [
+                      {
+                        "number": 0,
+                        "time": 0
+                      },
+                      {
+                        "number": 1,
+                        "time": 1.25
+                      },
+                      {
+                        "number": 2,
+                        "time": 3.68
+                      },
+                      {
+                        "number": 3,
+                        "time": 7.9
+                      },
+                      {
+                        "number": 4,
+                        "time": 12.15
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "201 Created"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "slides": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "number": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "time": {
+                                "type": "integer",
+                                "example": 3.25
+                              }
+                            }
+                          },
+                          "example": [
+                            {
+                              "number": 0,
+                              "time": 0
+                            },
+                            {
+                              "number": 1,
+                              "time": 1.25
+                            },
+                            {
+                              "number": 2,
+                              "time": 3.68
+                            },
+                            {
+                              "number": 3,
+                              "time": 7.9
+                            },
+                            {
+                              "number": 4,
+                              "time": 12.15
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "失敗時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "500 Internal Server Error"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "hoge is not found"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
