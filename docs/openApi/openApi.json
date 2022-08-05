@@ -44,30 +44,167 @@
                       "example": true
                     },
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "drive_file_id": {
-                            "type": "string",
-                            "example": "abcdefg123456"
+                      "type": "object",
+                      "properties": {
+                        "musics": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "driveFileId": {
+                                "type": "string",
+                                "example": "abcdefg123456"
+                              },
+                              "driveFileName": {
+                                "type": "string",
+                                "example": "人間っていいな.mp3"
+                              }
+                            }
                           },
-                          "drive_file_name": {
-                            "type": "string",
-                            "example": "人間っていいな"
+                          "example": [
+                            {
+                              "driveFileId": "abcdefg123456",
+                              "driveFileName": "人間っていいな.mp3"
+                            },
+                            {
+                              "driveFileId": "1a3j6io13bojk",
+                              "driveFileName": "人間っていいのか？.mp3"
+                            }
+                          ]
+                        },
+                        "presentations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "driveFileId": {
+                                "type": "string",
+                                "example": "abcdefg123456"
+                              },
+                              "driveFileName": {
+                                "type": "string",
+                                "example": "人間っていいな.pptx"
+                              }
+                            }
+                          },
+                          "example": [
+                            {
+                              "driveFileId": "abcdefg123456",
+                              "driveFileName": "人間っていいな.pptx"
+                            },
+                            {
+                              "driveFileId": "1a3j6io13bojk",
+                              "driveFileName": "人間っていいのか？.pptx"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "失敗時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "500 Internal Server Error"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "hoge is not found"
+                            }
                           }
                         }
-                      },
-                      "example": [
-                        {
-                          "drive_file_id": "abcdefg123456",
-                          "drive_file_name": "人間っていいな"
-                        },
-                        {
-                          "drive_file_id": "1a3j6io13bojk",
-                          "drive_file_name": "人間っていいのか？"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["musics"],
+        "description": "賛美保存",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "driveFileId": {
+                    "type": "string",
+                    "example": "abcdefg123456"
+                  },
+                  "driveFileName": {
+                    "type": "string",
+                    "example": "人間っていいな.mp3"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功時のレスポンス",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "201 Created"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "music": {
+                          "type": "object",
+                          "properties": {
+                            "driveFileId": {
+                              "type": "string",
+                              "example": "abcdefg123456"
+                            },
+                            "driveFileName": {
+                              "type": "string",
+                              "example": "人間っていいな.mp3"
+                            }
+                          }
                         }
-                      ]
+                      }
                     }
                   }
                 }
