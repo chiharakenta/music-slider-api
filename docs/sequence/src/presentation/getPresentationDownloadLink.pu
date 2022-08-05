@@ -1,0 +1,28 @@
+@startuml プレゼンテーション(pptx)のDLリンク取得
+
+title プレゼンテーション(pptx)のDLリンク取得フロー
+
+autonumber
+
+participant "ブラウザ" as browser
+participant "Node" as node
+participant "Cloud Firestore" as firestore
+participant "GAS" as gas
+
+browser -> browser: pptxのリストから1つをクリック
+browser -> browser: ロード画面表示
+browser -> node: pptxのdriveFileIdでDLリンクをリクエスト
+node -> firestore: pptxが存在していなければ新たに作成
+firestore -> node: 成功レスポンス
+
+node -> gas: OAuthトークンをリクエスト
+gas -> node: OAuthトークンを返す
+
+node -> node: pdf化してDLできるリンクを生成
+node -> browser: DLリンクを返す
+
+browser -> browser: ロード画面非表示
+browser -> browser: pptx検索コンポーネント非表示
+browser -> browser: スライドショーコンポーネント表示
+
+@enduml

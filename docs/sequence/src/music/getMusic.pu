@@ -1,0 +1,23 @@
+@startuml 楽曲取得
+
+title 楽曲取得フロー
+
+autonumber
+
+participant "ブラウザ" as browser
+participant "Node" as node
+participant "Drive API" as drive
+
+browser -> browser: 楽曲リストから1つをクリック
+browser -> browser: pptx検索コンポーネントに切り替える
+browser -> browser: 楽曲ロード画面を表示
+
+browser -> node: 楽曲取得リクエスト
+node -> drive: driveFileIdで楽曲取得リクエスト
+drive -> node: mp3ファイルを返す
+node -> browser: mp3ファイルを返す
+
+browser -> browser: 楽曲ロード画面を非表示
+browser -> browser: 楽曲再生コンポーネントを表示
+
+@enduml

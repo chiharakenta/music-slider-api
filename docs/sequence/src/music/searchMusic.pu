@@ -1,0 +1,22 @@
+@startuml 楽曲検索
+
+title 楽曲検索フロー
+
+autonumber
+
+participant "ブラウザ" as browser
+participant "Node" as node
+participant "Drive API" as drive
+
+browser -> node: 楽曲のタイトルで検索リクエスト
+node -> drive: 楽曲のタイトルで検索
+drive -> node: 楽曲とpptxを返す
+node -> browser: 楽曲とpptxを返す
+
+alt 検索結果が1件以上の場合
+  browser -> browser: 楽曲リストを表示
+else 検索結果が0件の場合
+  browser -> browser: 「楽曲が見つかりませんでした。」アラートを出す
+end
+
+@enduml
